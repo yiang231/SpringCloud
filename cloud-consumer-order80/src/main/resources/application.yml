@@ -3,3 +3,10 @@ server:
 spring:
   application:
     name: cloud-consumer-order80
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka  #Eureka Server默认Zone（类似于默认机房）的地址
