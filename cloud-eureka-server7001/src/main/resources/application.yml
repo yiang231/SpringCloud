@@ -1,0 +1,12 @@
+server:
+  port: 7001
+
+eureka:
+  instance:
+    hostname: localhost # Eureka服务器实例的主机名
+  client:
+    register-with-eureka: false #是否将自己注册到Eureka Server,自己就不注册到自己了
+    fetchRegistry: false #表示是否从Eureka Server获取注册信息。自己就不获取注册信息了
+    service-url:
+      defaultZone: http://localhost:7001/eureka  #Eureka Server默认Zone（类似于默认机房）的地址
+      #/eureka 不可少 不可变
