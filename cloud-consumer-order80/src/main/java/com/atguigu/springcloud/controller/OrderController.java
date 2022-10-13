@@ -21,12 +21,14 @@ public class OrderController {
 	@PostMapping(value = "/consumer/payment/create")
 	public CommonResult<Integer> create(@RequestBody Payment payment) {
 		CommonResult commonResult = restTemplate.postForObject("http://localhost:8001/payment/create", payment, CommonResult.class);
+		System.out.println("添加数据成功");
 		return commonResult;
 	}
 
 	@GetMapping(value = "/consumer/payment/get/{id}")
 	public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
 		CommonResult commonResult = restTemplate.getForObject("http://localhost:8001/payment/get/" + id, CommonResult.class);
+		System.out.println("查询成功");
 		return commonResult;
 	}
 }
