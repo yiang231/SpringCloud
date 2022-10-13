@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
-/*要使用的微服务名称（支付）*/
 @FeignClient(name = "CLOUD-PAYMENT-SERVICE") //!!!!
 public interface PaymentFeignService {
 
@@ -20,4 +19,7 @@ public interface PaymentFeignService {
 
 	@GetMapping(value = "/payment/get/{id}")
 	public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id);
+
+	@GetMapping(value = "/payment/feign/timeout")
+	public String paymentFeignTimeout();
 }
