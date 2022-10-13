@@ -10,3 +10,15 @@ eureka:
     fetchRegistry: true
     service-url:
       defaultZone: http://localhost:7001/eureka  #Eureka Server默认Zone（类似于默认机房）的地址
+
+#设置Feign客户端超时时间（openfeign默认支持ribbon）
+ribbon:
+  ReadTimeout: 1000
+  ConnectTimeout: 3000
+  MaxAutoRetries: 2 #同一台实例最大重试次数,不包括首次调用
+  MaxAutoRetriesNextServer: 2 #重试负载均衡其他的实例最大重试次数,不包括首次调用
+  OkToRetryOnAllOperations: false #只有Get请求进行重试。
+
+logging:
+  level:
+    com.atguigu.springcloud.service.PaymentFeignService: debug

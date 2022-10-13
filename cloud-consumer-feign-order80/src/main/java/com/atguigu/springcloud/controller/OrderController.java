@@ -19,13 +19,19 @@ public class OrderController {
 
 	@PostMapping(value = "/consumer/payment/create")
 	public CommonResult<Integer> create(@RequestBody Payment payment) {
-		CommonResult<Integer> commonResult = paymentFeignService.create(payment);
+		CommonResult<Integer> commonResult = this.paymentFeignService.create(payment);
 		return commonResult;
 	}
 
 	@GetMapping(value = "/consumer/payment/get/{id}")
 	public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
-		CommonResult<Payment> commonResult = paymentFeignService.getPaymentById(id);
+		CommonResult<Payment> commonResult = this.paymentFeignService.getPaymentById(id);
 		return commonResult;
 	}
+
+	@GetMapping(value = "/consumer/payment/timeout")
+	public String paymentFeignTimeout() {
+		return this.paymentFeignService.paymentFeignTimeout();
+	}
+
 }
