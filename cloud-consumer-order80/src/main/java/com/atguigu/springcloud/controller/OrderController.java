@@ -14,21 +14,21 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @Slf4j
 public class OrderController {
+	private static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE/";//8001 8002 8003
 	@Autowired
-	//SpringBoot启动时并没有创建RestTemplate对象，此时运行出现NullPointerException
-	private RestTemplate restTemplate;
+	private RestTemplate restTemplate; //SpringBoot启动时并没有创建RestTemplate对象，此时运行出现NullPointerException
 
 	@PostMapping(value = "/consumer/payment/create")
 	public CommonResult<Integer> create(@RequestBody Payment payment) {
-		CommonResult commonResult = restTemplate.postForObject("http://localhost:8001/payment/create", payment, CommonResult.class);
-		System.out.println("添加数据成功");
+		CommonResult commonResult =
+				this.restTemplate.postForObject(PAYMENT_URL + "payment/create", payment, CommonResult.class);
 		return commonResult;
 	}
 
 	@GetMapping(value = "/consumer/payment/get/{id}")
 	public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
-		CommonResult commonResult = restTemplate.getForObject("http://localhost:8001/payment/get/" + id, CommonResult.class);
-		System.out.println("查询成功");
+		CommonResult commonResult =
+				this.restTemplate.getForObject(PAYMENT_URL + "payment/get/" + id, CommonResult.class);
 		return commonResult;
 	}
 }
