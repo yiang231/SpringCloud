@@ -20,15 +20,20 @@ public class OrderController {
 
 	@PostMapping(value = "/consumer/payment/create")
 	public CommonResult<Integer> create(@RequestBody Payment payment) {
-		CommonResult commonResult =
-				this.restTemplate.postForObject(PAYMENT_URL + "payment/create", payment, CommonResult.class);
+		CommonResult commonResult = restTemplate.postForObject(PAYMENT_URL + "payment/create", payment, CommonResult.class);
 		return commonResult;
 	}
 
 	@GetMapping(value = "/consumer/payment/get/{id}")
 	public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
-		CommonResult commonResult =
-				this.restTemplate.getForObject(PAYMENT_URL + "payment/get/" + id, CommonResult.class);
+		CommonResult commonResult = restTemplate.getForObject(PAYMENT_URL + "payment/get/" + id, CommonResult.class);
 		return commonResult;
+	}
+
+	//==> zipkin+sleuth
+	@GetMapping("/consumer/payment/zipkin")
+	public String paymentZipkin() {
+		String result = restTemplate.getForObject(PAYMENT_URL + "/payment/zipkin/", String.class);
+		return result;
 	}
 }

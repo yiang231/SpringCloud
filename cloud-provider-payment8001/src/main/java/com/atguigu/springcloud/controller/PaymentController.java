@@ -42,4 +42,9 @@ public class PaymentController {
 			return new CommonResult(444, "没有对应记录，查询ID：" + id + "  " + serverPort);
 		}
 	}
+
+	@GetMapping("/payment/zipkin")
+	public String paymentZipkin() {
+		return "hi ,i'am paymentzipkin server，welcome to atguigu，O(∩_∩)O哈哈~";
+	}
 }
