@@ -38,7 +38,7 @@ public class PaymentController {
 	@GetMapping("/payment/circuit/{id}")
 	public String paymentCircuitBreaker(@PathVariable("id") Integer id,
 										@RequestParam(value = "name", required = false) String name1) {
-		System.out.println(name1);
+		System.out.println(name1);//配合gateway过滤器，测试追加参数
 		String result = paymentService.paymentCircuitBreaker(id);
 		log.info("*******result:" + result + "  " + serverPort);
 		return result + " " + serverPort + "  " + name1;

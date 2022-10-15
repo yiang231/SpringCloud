@@ -16,6 +16,8 @@ spring:
           #            - Cookie=username,atguigu
           #            - Header=aaaa, \d+ #请求头信息
           #            - Query=username, \d+
+          filters:
+            - AddRequestParameter=name,atguigu #给所有的请求加上参数
           #uri: http://localhost:8001   #匹配后提供服务的路由地址
           uri: lb://CLOUD-HYSTRIX-PAYMENT-SERVICE
 
