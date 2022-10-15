@@ -20,8 +20,8 @@ public class PaymentServiceImpl implements PaymentService {
 			})
 	public String paymentTimeout(Integer id) {
 		//int timeNumber = 3; //3<5 正常
-		int timeNumber = 6; //6>5 返回托底数据 实现了降级
-		int n = 10 / 0; //出现异常了，直接执行兜底参数方法
+		int timeNumber = 10; //6>5 返回托底数据 实现了降级
+		//int n = 10 / 0; //出现异常了，直接执行兜底参数方法
 		try {
 			TimeUnit.SECONDS.sleep(timeNumber);
 		} catch (Exception e) {
