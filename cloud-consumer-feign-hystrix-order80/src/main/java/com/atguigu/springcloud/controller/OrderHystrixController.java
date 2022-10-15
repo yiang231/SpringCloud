@@ -21,7 +21,7 @@ public class OrderHystrixController {
 	@HystrixCommand
 	@GetMapping("/consumer/payment/hystrix/ok/{id}")
 	public String paymentInfoOK(@PathVariable("id") Integer id) {
-		int i = 10 / 0;
+		int i = 10 / 0;//调用不到后面的方法，ok的托底方法就不会执行
 		String result = paymentHystrixService.paymentInfoOK(id);
 		log.info("*******result:" + result);
 		return result;
@@ -42,6 +42,7 @@ public class OrderHystrixController {
 	}
 
 	//下面是全局fallback方法
+	//有全局的托底方法和ok分开的托底方法，会执行OK的托底方法，原因是调用了ok的托底方法
 	public String paymentGlobalFallbackMethod() {
 		return "公共托底方法：Global异常处理信息，请稍后再试,(┬＿┬)";
 	}
