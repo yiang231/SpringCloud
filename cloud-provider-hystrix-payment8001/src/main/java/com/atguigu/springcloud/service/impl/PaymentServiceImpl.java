@@ -15,21 +15,22 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	//失败
-	@HystrixCommand(fallbackMethod = "paymentTimeoutFallBack", commandProperties = {
-			@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000")
-	})
+	@HystrixCommand(fallbackMethod = "paymentTimeoutFallBack",
+			commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000")
+			})
 	public String paymentTimeout(Integer id) {
-		int timeNumber = 3; //3<5 正常
-		//int timeNumber = 13; //13>5 返回托底数据 实现了降级
-		//int n = 10/0; //出现异常了
+		//int timeNumber = 3; //3<5 正常
+		int timeNumber = 6; //6>5 返回托底数据 实现了降级
+		int n = 10 / 0; //出现异常了，直接执行兜底参数方法
 		try {
 			TimeUnit.SECONDS.sleep(timeNumber);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "线程池：" + Thread.currentThread().getName() + "   paymentInfoTimeout,id：  " + id + "\t" + "呜呜呜" + " 耗时(秒)" + timeNumber;
+		return "线程池：" + Thread.currentThread().getName() + "   paymentInfoTimeout,id：" + id + "\t" + "呜呜呜" + " 耗时(秒)" + timeNumber;
 	}
 
+	//兜底参数用来实现降级
 	public String paymentTimeoutFallBack(Integer id) {
 		return "线程池：" + Thread.currentThread().getName() + " paymentTimeoutFallBack,系统繁忙,请稍后再试\t o(╥﹏╥)o ";
 	}
