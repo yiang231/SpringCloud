@@ -1,0 +1,5 @@
+server:
+  port: 9002
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: localhost  # 要监视的主机
